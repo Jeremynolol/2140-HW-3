@@ -246,19 +246,18 @@ void openOutputFile(std::ofstream& outStream, const std::string& fileName, bool 
 {
     if (append)
     {
-        outStream.open(fileName);
+        outStream.open(fileName, std::ios::app);
     }
-else //open file and replace contents
-{
+    else //open file and replace contents
+    {
     outStream.open(fileName);
-}
-
-if (outStream.fail()) // check file failed to open
-{
-    std::cout << "Output file opening failed: "
-    << fileName << std::endl;
+    }
+    
+    if (outStream.fail()) // check file failed to open
+    {
+    std::cout << "Output file opening failed: " << fileName << std::endl;
     exit (1);
-} 
+    }
 }
 
 // TODO 4: countLetters
@@ -371,13 +370,15 @@ void rankLetters(const int counts[], char ranked[])
 //               count is 0. Must call sumArray and indexOfLargest.
 int guessShift(const int counts[])
 {
-    int largestIndex = indexOfLargest(counts, ALPHABET_SIZE);
+    int total = sumArray(counts, ALPHABET_SIZE);
 
-    if (counts[largestIndex] == 0)
+    if (total == 0)
     {
         return 0;
     }
 
+    int largestIndex = indexOfLargest(counts, ALPHABET_SIZE);
+    
     int shift = (largestIndex - (MOST_COMMON_LETTER - 'A') + ALPHABET_SIZE) % ALPHABET_SIZE;
 
     

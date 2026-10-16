@@ -1,0 +1,1 @@
+encode notes.txt -> notes_secret.txt (shift 4)
